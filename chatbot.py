@@ -17,7 +17,7 @@ def initialize_gemini():
         
         logger.info("Creating chat session with system instructions...")
         chat_session = client.chats.create(
-            model="gemini-2.5-flash",
+            model="gemini-2.5-flash-lite",
             config=genai.types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
                 temperature=0.7,
