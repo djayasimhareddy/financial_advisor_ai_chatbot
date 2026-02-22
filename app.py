@@ -40,19 +40,22 @@ if user_input:
 
     # 2. Get and stream AI response
     with st.chat_message("assistant", avatar="🏦"):
-        try:
-            chat = st.session_state.chat_session
-            
-            # Use send_message_stream for real-time rendering
-            response_stream = chat.send_message_stream(user_input)
-            
-            # Streamlit automatically handles the generator for a typing effect
-            bot_reply = st.write_stream(
-                chunk.text for chunk in response_stream if chunk.text
-            )
-            
-            # Save the complete message to UI history
-            st.session_state.messages.append(("assistant", bot_reply))
-            
-        except Exception as e:
-            st.error(f"An API error occurred: {e}")
+       with st.spinner("Analyzing your query..."):
+            try:
+                chat = st.session_state.chat_session
+                
+                # A safe generator to prevent Streamlit from crashing on empty chunks
+                def stream_parser(stream):
+                    for chunk in stream:
+                        if chunk.text:
+                            yield chunk.text
+
+                # Get and stream the AI response safely
+                response_stream = chat.send_message_stream(user_input)
+                bot_reply = st.write_stream(stream_parser(response_stream))
+                
+                # Save the complete message to UI history
+                st.session_state.messages.append(("assistant", bot_reply))
+                
+            except Exception as e:
+                st.error(f"An API error occurred: {e}")
