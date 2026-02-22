@@ -21,6 +21,7 @@ def initialize_gemini():
             config=genai.types.GenerateContentConfig(
                 system_instruction=SYSTEM_PROMPT,
                 temperature=0.7,
+                max_output_tokens=2048,
             )
         )
         logger.info("Chat session initialized successfully.")

@@ -57,6 +57,11 @@ if user_input:
                 # Save the complete message to UI history
                 st.session_state.messages.append(("assistant", bot_reply))
             except Exception as e:
+                # 1. Delete the user's unanswered message from the chat history
+                if st.session_state.messages:
+                    st.session_state.messages.pop()
+                
+                # 2. Show the friendly error message
                 error_message = str(e)
                 if "429" in error_message or "RESOURCE_EXHAUSTED" in error_message:
                     st.warning("⏳ Whoa there! We are chatting a bit too fast. Please wait 15 seconds and try your message again.")
