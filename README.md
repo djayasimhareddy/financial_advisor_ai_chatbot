@@ -17,8 +17,8 @@ The application follows a clean, decoupled architecture:
 * **Production Guardrails:** Engineered to provide financial *education* while safely declining high-risk speculative requests.
 
 ## 🚀 Local Setup Instructions
-1. Clone the repository: `git clone <your-github-repo-url>`
-2. Navigate to the project directory: `cd <repo-name>`
+1. Clone the repository: `git clone https://github.com/djayasimhareddy/financial_advisor_ai_chatbot`
+2. Navigate to the project directory: `cd financial_advisor_ai_chatbot`
 3. Create a virtual environment: `python -m venv venv`
 4. Activate the environment: `source venv/bin/activate` (Mac/Linux) or `venv\Scripts\activate` (Windows)
 5. Install dependencies: `pip install streamlit google-genai python-dotenv`
